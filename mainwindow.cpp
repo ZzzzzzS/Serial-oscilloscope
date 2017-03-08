@@ -46,7 +46,7 @@ void MainWindow::MainWindow_Init()
     ui->SendCleanBox->setChecked(true);
     ui->ReceiveArea->setReadOnly(true);
 
-    ui->QwtDataBox->setCurrentIndex(1);
+    ui->QwtDataBox->setCurrentIndex(0);
 
 
     this->QwtTimer->start(50);
@@ -214,9 +214,9 @@ void MainWindow::PortReceive_Slot()
         else
         {
             QByteArray buf;
-            buf =Port.readAll();
+            buf =Port.read(1);
             QString str = ui->ReceiveArea->toPlainText();
-            str+="下位机:"+tr(buf.toHex())+"\n";
+            str+="下位机:"+tr(buf.toHex()+" ")+"\n";
             ui->ReceiveArea->clear();
             ui->ReceiveArea->append(str);
             buf.clear();
@@ -245,8 +245,8 @@ void MainWindow::Qwt_Init()
     ui->Plot->setAxisAutoScale(QwtPlot::yLeft,true);
     ui->Plot->setAxisAutoScale(QwtPlot::xBottom,true);
 
-    QwtPlotMagnifier Magnifer(ui->Plot->canvas());//设置鼠标滚动
-    QwtPlotPanner Panner(ui->Plot->canvas());
+    QwtPlotMagnifier *Magnifer=new QwtPlotMagnifier(ui->Plot->canvas());//设置鼠标滚动
+    QwtPlotPanner *Panner=new QwtPlotPanner(ui->Plot->canvas());
 
     for(char i=0;i<6;i++)
     {
@@ -295,8 +295,8 @@ void MainWindow::QwtReceive_Slot()
         if(ui->QwtSignedBox->isChecked())
         {
             char data[6*2+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
+            this->Port.read((char*)data,number+4);
+            if(Port.bytesAvailable()>=number+4)
             {
                 for(int i=0;i<number+4;i++)
                 {
@@ -458,7 +458,6 @@ void MainWindow::QwtTime_Slot()
         if(ui->QwtTrackBox->isChecked())
         {
             ui->Plot->setAxisScale(QwtPlot::xBottom,Timei,25+Timei);
-            ui->Plot->replot();//这句话以后要删掉
         }
     }
     else if(!Port.isOpen())
