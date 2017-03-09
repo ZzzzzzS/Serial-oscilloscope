@@ -326,7 +326,6 @@ void MainWindow::QwtReceive_Slot()
                       break;
 
                   }
-qDebug()<<data[i];
               }
             }
         }
@@ -471,10 +470,10 @@ void MainWindow::QwtTime_Slot()
 {
     if(Port.isOpen())
     {
-        Timei+=100;
+        Timei+=1;
         if(ui->QwtTrackBox->isChecked())
         {
-            ui->Plot->setAxisScale(QwtPlot::xBottom,Timei,25000+Timei);
+            ui->Plot->setAxisScale(QwtPlot::xBottom,Timei-25,25+Timei);
         }
     }
     else if(!Port.isOpen())
