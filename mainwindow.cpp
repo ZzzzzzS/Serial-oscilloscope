@@ -87,28 +87,46 @@ void MainWindow::Port_Init()
             Port.setPortName(ui->COMBox->currentText());
             Port.open(QIODevice::ReadWrite);
             Port.setBaudRate(ui->SpeedBox->currentText().toInt());  //设置波特率
+            switch(ui->SpeedBox->currentIndex())
+            {
+                case 0:
+                    Port.setBaudRate(QSerialPort::Baud115200);
+                    break;
+                case 1:
+                    Port.setBaudRate(QSerialPort::Baud57600);
+                    break;
+                case 2:
+                    Port.setBaudRate(QSerialPort::Baud38400);
+                    break;
+                case 3:
+                    Port.setBaudRate(QSerialPort::Baud19200);
+                    break;
+                case 4:
+                    Port.setBaudRate(QSerialPort::Baud9600);
+                    break;
+            }
             switch(ui->DataBox->currentIndex())                     //设置数据位
             {
-                case 8:
+                case 0:
                     Port.setDataBits(QSerialPort::Data8);
                     break;
-                case 7:
+                case 1:
                     Port.setDataBits(QSerialPort::Data7);
                     break;
-                case 6:
+                case 2:
                     Port.setDataBits(QSerialPort::Data6);
                     break;
-                case 5:
+                case 3:
                     Port.setDataBits(QSerialPort::Data5);
                     break;
             }
 
             switch(ui->StopBox->currentIndex())                     //设置停止位
             {
-                case 1:
+                case 0:
                     Port.setStopBits(QSerialPort::OneStop);
                     break;
-                case 2:
+                case 1:
                     Port.setStopBits(QSerialPort::TwoStop);
                     break;
             }
@@ -117,10 +135,13 @@ void MainWindow::Port_Init()
             {
                 case 0:
                     Port.setParity(QSerialPort::NoParity);
+                    break;
                 case 1:
                     Port.setParity(QSerialPort::OddParity);
+                    break;
                 case 2:
                     Port.setParity(QSerialPort::EvenParity);
+                    break;
             }
 
             ui->COMBox->setEnabled(false);                          //禁用按钮
@@ -134,7 +155,7 @@ void MainWindow::Port_Init()
             ui->ReceiveArea->clear();
             ui->SendArea->clear();
 
-            QObject::connect(&Port, &QSerialPort::readyRead, this, &MainWindow::Receive_Slot);//这句不太懂
+            QObject::connect(&Port, &QSerialPort::readyRead, this, &MainWindow::Receive_Slot);
         }
 
     else
@@ -191,7 +212,7 @@ void MainWindow::SendFile_Slot()
         return;
         }
     Port.write(ui->SendArea->toPlainText().toLatin1());
-    ui->ReceiveArea->append("上位机:"+ui->SendArea->toPlainText()+"\n");
+    ui->ReceiveArea->append("上位机:"+ui->SendArea->toPlainText());
     if(ui->SendCleanBox->isChecked())
     {
         ui->SendArea->clear();
@@ -200,14 +221,11 @@ void MainWindow::SendFile_Slot()
 
 void MainWindow::PortReceive_Slot()
 {
-    //是否存在一直接收数据无法显示的情况？
         if(!ui->HEXCheckBox->isChecked())
         {
             QByteArray buf;
             buf =Port.readAll();
-            QString str = ui->ReceiveArea->toPlainText();
-            str+="下位机:"+tr(buf)+"\n";
-            ui->ReceiveArea->clear();
+            QString str="下位机:"+buf;
             ui->ReceiveArea->append(str);
             buf.clear();
         }
@@ -215,21 +233,19 @@ void MainWindow::PortReceive_Slot()
         {
             QByteArray buf;
             buf =Port.read(1);
-            QString str = ui->ReceiveArea->toPlainText();
-            str+="下位机:"+tr(buf.toHex()+" ")+"\n";
-            ui->ReceiveArea->clear();
-            ui->ReceiveArea->append(str);
+            QString str =" "+buf.toHex();
+            ui->ReceiveArea->insertPlainText(str);
             buf.clear();
         }
 }
 
 void MainWindow::Receive_Slot()
 {
-    if(0==ui->tabWidget->currentIndex())
+    if(1==ui->tabWidget->currentIndex())
     {
         this->PortReceive_Slot();
     }
-    else if(1==ui->tabWidget->currentIndex())
+    else if(0==ui->tabWidget->currentIndex())
     {
         this->QwtReceive_Slot();
     }
