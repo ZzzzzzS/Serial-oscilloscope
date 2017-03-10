@@ -307,17 +307,30 @@ void MainWindow::QwtReceive_Slot()
     //采用山外发送协议，具体协议内容查看山外例程http://vcan123.com/forum.php?mod=viewthread&tid=6253&ctid=27
     switch (ui->QwtDataBox->currentIndex())
     {
-    char data[8*2+8];
+    int data[8*2+8+100];
     case 0:
         if(ui->QwtSignedBox->isChecked())
         {
             if(Port.bytesAvailable()>=number*2+8)
             {
-            Port.read(number*2+8);
+                QByteArray buf;
+                QString temp;
+                for(int k=0;k<number*2+8;k++)
+                {
+                    buf =Port.read(1);
+                    bool ok=true;
+                    temp=buf.toHex();
+                    data[k]=temp.toInt(&ok,16);
+                   // qDebug()<<temp.toInt(&ok,16);
+                    buf.clear();
+                    temp.clear();
+                }
               for(int i=0;i<number+4;i++)
               {
-                  if(true/*data[i]==0x03 && data[i+1]==0xfc && data[i+2+number]==0xfc && data[i+3+number]==0x03*/)
+                  if(data[i]==3&&data[i+1]==252&&data[i+2+number]==0xfc&&data[i+3+number]==0x03)
                   {
+                      qDebug()<<"check";
+                      qDebug()<<data[i+1];
                       for(int j=0;j<number;j++)
                       {
                           yData[j].append(data[i+2+j]);
