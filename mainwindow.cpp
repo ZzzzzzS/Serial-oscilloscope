@@ -329,8 +329,6 @@ void MainWindow::QwtReceive_Slot()
               {
                   if(data[i]==3&&data[i+1]==252&&data[i+2+number]==0xfc&&data[i+3+number]==0x03)
                   {
-                      qDebug()<<"check";
-                      qDebug()<<data[i+1];
                       for(int j=0;j<number;j++)
                       {
                           yData[j].append(data[i+2+j]);
