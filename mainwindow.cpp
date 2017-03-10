@@ -340,113 +340,11 @@ void MainWindow::QwtReceive_Slot()
               }
             }
         }
-        /*else
+        else if(!ui->QwtSignedBox->isChecked())
         {
-            char data[6*2+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
-            {
-                for(int i=0;i<number+4;i++)
-                {
-                    if(data[i]==0x03&&data[i+1]==0xfc&&data[i+2+4*number]==0xfc&&data[i+3+4*number]==0x03)
-                    {
-                        for(int j=0;j<number;j++)
-                        {
-                            yData[j].append(i+2+j);
-                        }
-                        xData.append(Timei*20);
-                        break;
-                    }
-                }
+            ui->QwtSignedBox->setChecked(true);
+        }
 
-            }
-        }*/
-        break;
-    /*case 1:
-        if(ui->QwtSignedBox->isChecked())
-        {
-            char data[6*2*2+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
-            {
-                for(int i=0;i<number+4;i++)
-                {
-                    if(data[i]==0x03&&data[i+1]==0xfc&&data[i+2+4*number]==0xfc&&data[i+3+4*number]==0x03)
-                    {
-                        for(int j=0;j<number;j++)
-                        {
-                            yData[j].append((char)data[i+2+j+1]<<8|data[i+2+j]);
-                        }
-                        xData.append(Timei*20);
-                        break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            unsigned char data[6*2*2+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
-            {
-                for(int i=0;i<number+4;i++)
-                {
-                    if(data[i]==0x03&&data[i+1]==0xfc&&data[i+2+4*number]==0xfc&&data[i+3+4*number]==0x03)
-                    {
-                        for(int j=0;j<number;j++)
-                        {
-                            yData[j].append(data[i+2+j+1]<<8|data[i+2+j]);
-                        }
-                        xData.append(Timei*20);
-                        break;
-                    }
-                }
-            }
-        }
-        break;
-    case 2:
-        if(ui->QwtSignedBox->isChecked())
-        {
-
-            char data[6*2*4+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
-            {
-                for(int i=0;i<number+4;i++)
-                {
-                    if(data[i]==0x03&&data[i+1]==0xfc&&data[i+2+4*number]==0xfc&&data[i+3+4*number]==0x03)
-                    {
-                        for(int j=0;j<number;j++)
-                        {
-                            yData[j].append((char)data[i+2+j+3]<<24|data[i+2+j+2]<<16|data[i+2+j+1]<<8|data[i+2+j]);
-                        }
-                        xData.append(Timei*20);
-                        break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            unsigned char data[6*2*4+8];
-            this->Port.read((char*)data,number*2+8);
-            if(Port.bytesAvailable()>=number*2+8)
-            {
-                for(int i=0;i<number+4;i++)
-                {
-                    if(data[i]==0x03&&data[i+1]==0xfc&&data[i+2+4*number]==0xfc&&data[i+3+4*number]==0x03)
-                    {
-                        for(int j=0;j<number;j++)
-                        {
-                            yData[j].append(data[i+2+j+3]<<24|data[i+2+j+2]<<16|data[i+2+j+1]<<8|data[i+2+j]);
-                        }
-                        xData.append(Timei*20);
-                        break;
-                    }
-                }
-            }
-        }
-        break;*/
     }
 
     if(ui->Qwt1Button->isChecked())//设置显示的线

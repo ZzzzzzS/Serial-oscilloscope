@@ -499,20 +499,13 @@ color: rgb(255, 255, 255);</string>
               <string>8位</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>16位</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>32位</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="QwtSignedBox">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="text">
              <string>有符号</string>
             </property>
