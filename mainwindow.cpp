@@ -211,6 +211,12 @@ void MainWindow::SendFile_Slot()
         QMessageBox::information(this,tr("718 Lab"),"串口未打开",QMessageBox::Ok);
         return;
         }
+    QString ok=ui->SendArea->toPlainText();
+    if(ok.isEmpty())
+    {
+        QMessageBox::information(this,tr("718 Lab"),"请输入内容",QMessageBox::Ok);
+        return;
+    }
     Port.write(ui->SendArea->toPlainText().toLatin1());
     ui->ReceiveArea->append("上位机:"+ui->SendArea->toPlainText());
     if(ui->SendCleanBox->isChecked())
@@ -288,22 +294,12 @@ void MainWindow::Qwt_Init()
 
     ui->Plot->setAxisScale(QwtPlot::yLeft,-1000,1000);
     ui->Plot->setAxisScale(QwtPlot::xBottom,0,25);
-
-
-
-   /* for (double x = 0; x < 2.0 * M_PI; x+=(M_PI / 10.0))
-        {
-            yData[0].append(qSin(x));
-            xData.append(x);
-        }
-
-    this->Curve[0]->setSamples(xData,yData[0]);
-    ui->Plot->show();*/
 }
 
 void MainWindow::QwtReceive_Slot()
 {
     int number=this->QwtCurrentNumber();
+    bool received;
     //采用山外发送协议，具体协议内容查看山外例程http://vcan123.com/forum.php?mod=viewthread&tid=6253&ctid=27
     switch (ui->QwtDataBox->currentIndex())
     {
@@ -311,6 +307,7 @@ void MainWindow::QwtReceive_Slot()
     case 0:
         if(ui->QwtSignedBox->isChecked())
         {
+            received=false;
             if(Port.bytesAvailable()>=number*2+8)
             {
                 QByteArray buf;
@@ -321,7 +318,6 @@ void MainWindow::QwtReceive_Slot()
                     bool ok=true;
                     temp=buf.toHex();
                     data[k]=temp.toInt(&ok,16);
-                   // qDebug()<<temp.toInt(&ok,16);
                     buf.clear();
                     temp.clear();
                 }
@@ -329,6 +325,7 @@ void MainWindow::QwtReceive_Slot()
               {
                   if(data[i]==3&&data[i+1]==252&&data[i+2+number]==0xfc&&data[i+3+number]==0x03)
                   {
+                      received=true;
                       for(int j=0;j<number;j++)
                       {
                           yData[j].append(data[i+2+j]);
@@ -372,7 +369,8 @@ void MainWindow::QwtReceive_Slot()
         this->Curve[5]->setSamples(xData,yData[5]);
     }
 
-    ui->Plot->replot();//重新画图
+    if(received==true)
+        ui->Plot->replot();//重新画图
 }
 
 void MainWindow::QwtTime_Slot()
