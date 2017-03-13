@@ -47,7 +47,7 @@ void MainWindow::MainWindow_Init()
     ui->ReceiveArea->setReadOnly(true);
 
     ui->QwtDataBox->setCurrentIndex(0);
-
+    ui->tabWidget->setCurrentIndex(1);
 
     this->QwtTimer->start(50);
 }
@@ -65,7 +65,7 @@ void MainWindow::Port_Scan()
            ui->PowerButton->setEnabled(false);
            return;
        }
-       foreach (QSerialPortInfo info, infos) //抄的没看懂
+       foreach (QSerialPortInfo info, infos)
        {
            ui->COMBox->addItem(info.portName());
        }
@@ -154,6 +154,7 @@ void MainWindow::Port_Init()
             ui->PowerButton->setEnabled(true);
             ui->ReceiveArea->clear();
             ui->SendArea->clear();
+            ui->SendButton->setEnabled(true);
 
             QObject::connect(&Port, &QSerialPort::readyRead, this, &MainWindow::Receive_Slot);
         }
@@ -166,6 +167,7 @@ void MainWindow::Port_Init()
             ui->SpeedBox->setEnabled(true);
             ui->StopBox->setEnabled(true);
             ui->CheckBox->setEnabled(true);
+            ui->SendButton->setEnabled(false);
 
             Port.clear();                                           //关闭并删除串口
             Port.close();
@@ -214,8 +216,11 @@ void MainWindow::SendFile_Slot()
     QString ok=ui->SendArea->toPlainText();
     if(ok.isEmpty())
     {
-        QMessageBox::information(this,tr("718 Lab"),"请输入内容",QMessageBox::Ok);
-        return;
+        if(QMessageBox::information(this,tr("当前发送区无内容"),"您确定要发送空内容吗?",QMessageBox::Cancel|QMessageBox::Ok)==QMessageBox::Cancel)
+        {
+            return;
+        }
+
     }
     Port.write(ui->SendArea->toPlainText().toLatin1());
     ui->ReceiveArea->append("上位机:"+ui->SendArea->toPlainText());
