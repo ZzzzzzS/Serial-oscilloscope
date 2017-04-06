@@ -49,6 +49,8 @@ void MainWindow::MainWindow_Init()
     ui->QwtDataBox->setCurrentIndex(0);
     ui->tabWidget->setCurrentIndex(1);
 
+    ui->Qwt5Button->setChecked(true);
+
     this->QwtTimer->start(50);
 }
 
