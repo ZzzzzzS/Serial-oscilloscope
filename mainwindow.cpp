@@ -47,7 +47,7 @@ void MainWindow::MainWindow_Init()
     ui->ReceiveArea->setReadOnly(true);
 
     ui->QwtDataBox->setCurrentIndex(0);
-    ui->tabWidget->setCurrentIndex(1);
+    ui->tabWidget->setCurrentIndex(2);
 
     ui->Qwt5Button->setChecked(true);
 

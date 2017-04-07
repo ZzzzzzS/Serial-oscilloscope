@@ -1736,22 +1736,22 @@ p, li { white-space: pre-wrap; }
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="L_PLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="QLineEdit" name="L_ILine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3"/>
+            <widget class="QLineEdit" name="L_DLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_4"/>
+            <widget class="QLineEdit" name="L_NowSpeedLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_5"/>
+            <widget class="QLineEdit" name="L_AimSpeedLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_6"/>
+            <widget class="QLineEdit" name="L_OutSpeedLine"/>
            </item>
           </layout>
          </item>
@@ -1829,22 +1829,22 @@ p, li { white-space: pre-wrap; }
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
-            <widget class="QLineEdit" name="lineEdit_7"/>
+            <widget class="QLineEdit" name="R_PLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_8"/>
+            <widget class="QLineEdit" name="R_ILine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_9"/>
+            <widget class="QLineEdit" name="R_DLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_10"/>
+            <widget class="QLineEdit" name="R_NowSpeedLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_11"/>
+            <widget class="QLineEdit" name="R_AimSpeedLine"/>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_12"/>
+            <widget class="QLineEdit" name="R_OutSpeedLine"/>
            </item>
           </layout>
          </item>
@@ -1863,71 +1863,28 @@ p, li { white-space: pre-wrap; }
        <property name="title">
         <string>串口信息</string>
        </property>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="geometry">
-         <rect>
-          <x>13</x>
-          <y>30</y>
-          <width>321</width>
-          <height>381</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>420</y>
+          <x>12</x>
+          <y>30</y>
           <width>321</width>
-          <height>70</height>
+          <height>461</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_10">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9">
-           <item>
-            <widget class="QPushButton" name="pushButton_7">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_10">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_8">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QTextEdit" name="ReceiveArea_2"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
-            <widget class="QPushButton" name="pushButton_11">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
+            <widget class="QLineEdit" name="SendArea_2"/>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_9">
+            <widget class="QPushButton" name="SendButton2">
              <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_12">
-             <property name="text">
-              <string>PushButton</string>
+              <string>发送</string>
              </property>
             </widget>
            </item>
@@ -1941,61 +1898,23 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>10</x>
          <y>330</y>
-         <width>611</width>
+         <width>441</width>
          <height>171</height>
         </rect>
        </property>
        <property name="title">
         <string>电感和方向信息</string>
        </property>
-       <widget class="QLabel" name="label_24">
-        <property name="geometry">
-         <rect>
-          <x>463</x>
-          <y>31</y>
-          <width>131</width>
-          <height>131</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>30</y>
-          <width>441</width>
+          <width>421</width>
           <height>131</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_16">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
-           <item>
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox_2">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBox_3">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
@@ -2010,7 +1929,7 @@ p, li { white-space: pre-wrap; }
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_13"/>
+                <widget class="QLineEdit" name="err_Line"/>
                </item>
               </layout>
              </item>
@@ -2046,7 +1965,7 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_14"/>
+              <widget class="QLineEdit" name="diangan1"/>
              </item>
              <item>
               <spacer name="horizontalSpacer">
@@ -2062,7 +1981,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_15"/>
+              <widget class="QLineEdit" name="diangan2"/>
              </item>
              <item>
               <spacer name="horizontalSpacer_2">
@@ -2078,7 +1997,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_17"/>
+              <widget class="QLineEdit" name="diangan3"/>
              </item>
              <item>
               <spacer name="horizontalSpacer_3">
@@ -2094,7 +2013,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_16"/>
+              <widget class="QLineEdit" name="diangan4"/>
              </item>
              <item>
               <spacer name="horizontalSpacer_4">
@@ -2110,7 +2029,7 @@ p, li { white-space: pre-wrap; }
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_18"/>
+              <widget class="QLineEdit" name="diangan5"/>
              </item>
             </layout>
            </item>
@@ -2124,7 +2043,7 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_19"/>
+              <widget class="QLineEdit" name="MatchedLine"/>
              </item>
              <item>
               <widget class="QLabel" name="label_23">
@@ -2134,11 +2053,73 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_20"/>
+              <widget class="QLineEdit" name="xiangsiduLine"/>
              </item>
             </layout>
            </item>
           </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_13">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>330</y>
+         <width>161</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>操作</string>
+       </property>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>30</y>
+          <width>111</width>
+          <height>131</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_13">
+         <item>
+          <widget class="QPushButton" name="ReadMeButton">
+           <property name="text">
+            <string>使用须知</string>
+           </property>
+           <property name="default">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Save_NowButton">
+           <property name="text">
+            <string>保存当前信息</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>None</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>None</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
