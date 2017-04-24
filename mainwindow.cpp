@@ -35,6 +35,9 @@ void MainWindow::Set_Slots()
     QObject::connect(ui->SendButton,SIGNAL(clicked(bool)),this,SLOT(SendFile_Slot()));//串口发送槽
     QObject::connect(this->QwtTimer,SIGNAL(timeout()),this,SLOT(QwtTime_Slot()));//qt定时器槽
     QObject::connect(ui->QwtCleanButton,SIGNAL(clicked(bool)),this,SLOT(QwtClean_Slot()));//清空Qwt槽
+    QObject::connect(ui->ReadMeButton,SIGNAL(clicked()),this,SLOT(ReadMe_Slot()));
+    QObject::connect(ui->SendButton2,SIGNAL(clicked()),this,SLOT(SendFile_Slot2()));
+    QObject::connect(ui->CleanButton_2,SIGNAL(clicked()),ui->ReceiveArea_2,SLOT(clear()));
 }
 
 void MainWindow::MainWindow_Init()
@@ -45,6 +48,7 @@ void MainWindow::MainWindow_Init()
 
     ui->SendCleanBox->setChecked(true);
     ui->ReceiveArea->setReadOnly(true);
+    ui->ReceiveArea_2->setReadOnly(true);
 
     ui->QwtDataBox->setCurrentIndex(0);
     ui->tabWidget->setCurrentIndex(2);
@@ -83,10 +87,10 @@ void MainWindow::About_Slot()
 void MainWindow::Port_Init()
 {
     if(ui->PowerButton->text()==tr("打开串口"))
-        {
-            ui->PowerButton->setEnabled(false);
+    {
+        ui->PowerButton->setEnabled(false);
 
-            Port.setPortName(ui->COMBox->currentText());
+        Port.setPortName(ui->COMBox->currentText());
             Port.open(QIODevice::ReadWrite);
             Port.setBaudRate(ui->SpeedBox->currentText().toInt());  //设置波特率
             switch(ui->SpeedBox->currentIndex())
@@ -261,6 +265,10 @@ void MainWindow::Receive_Slot()
     else if(0==ui->tabWidget->currentIndex())
     {
         this->QwtReceive_Slot();
+    }
+    else if(2==ui->tabWidget->currentIndex())
+    {
+        this->Speed_Slot();
     }
 }
 //qwt部分*******************************************
@@ -442,4 +450,95 @@ int MainWindow::QwtCurrentNumber()
         i++;
     }
     return i;
+}
+//车速显示器部分*******************************************
+void MainWindow::ReadMe_Slot()
+{
+    readme read;
+    read.show();
+    read.exec();
+}
+
+void MainWindow::Speed_Slot()
+{
+    QByteArray buf;
+    QString temp;
+    unsigned char data[110];
+    if(Port.bytesAvailable()>=100)
+    {
+        for(int i=0;i<100;i++)
+        {
+            buf=Port.read(1);
+            temp=buf.toHex();
+            bool ok=true;
+            data[i]=temp.toInt(&ok,16);
+            buf.clear();
+            temp.clear();
+        }
+
+        for(int i=0;i<105;i++)
+        {
+            if(data[i]==33&&data[i+1]==252&&data[i+10]==252&&data[i+11]==33)//电感判断
+            {
+                QString receive=data[i+2];
+                ui->err_Line->setText(receive);
+                receive.clear();
+
+            }
+        }
+    }
+
+/*if(ui->QwtSignedBox->isChecked())
+        {
+            received=false;
+            if(Port.bytesAvailable()>=number*2+8)
+            {
+                QByteArray buf;
+                QString temp;
+                for(int k=0;k<number*2+8;k++)
+                {
+                    buf =Port.read(1);
+                    bool ok=true;
+                    temp=buf.toHex();
+                    data[k]=temp.toInt(&ok,16);
+                    buf.clear();
+                    temp.clear();
+                }
+              for(int i=0;i<number+4;i++)
+              {
+                  if(data[i]==3&&data[i+1]==252&&data[i+2+number]==0xfc&&data[i+3+number]==0x03)
+                  {
+                      received=true;
+                      for(int j=0;j<number;j++)
+                      {
+                          yData[j].append(data[i+2+j]);
+                      }
+                      xData.append(Timei);
+                      break;
+
+                  }
+              }
+            }
+        }*/
+}
+
+void MainWindow::SendFile_Slot2()
+{
+    if(ui->PowerButton->text()==tr("打开串口"))
+        {
+        QMessageBox::information(this,tr("718 Lab"),"串口未打开",QMessageBox::Ok);
+        return;
+        }
+    QString ok=ui->SendArea_2->text();
+    if(ok.isEmpty())
+    {
+        if(QMessageBox::information(this,tr("当前发送区无内容"),"您确定要发送空内容吗?",QMessageBox::Cancel|QMessageBox::Ok)==QMessageBox::Cancel)
+        {
+            return;
+        }
+
+    }
+    Port.write(ui->SendArea_2->text().toLatin1());
+    ui->ReceiveArea_2->append("上位机:"+ui->SendArea_2->text());
+    ui->SendArea_2->clear();
 }

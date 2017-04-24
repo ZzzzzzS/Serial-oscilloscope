@@ -31,14 +31,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    readme.cpp
 
 HEADERS  += mainwindow.h \
     include.h \
-    aboutwindow.h
+    aboutwindow.h \
+    readme.h
 
 FORMS    += mainwindow.ui \
-    aboutwindow.ui
+    aboutwindow.ui \
+    readme.ui
 
 RESOURCES += \
     resorse.qrc

@@ -45,6 +45,7 @@
 
 #include "mainwindow.h"
 #include "aboutwindow.h"
+#include "readme.h"
 
 #if _MSC_VER >= 1600
 #pragma execution_character_set("utf-8")

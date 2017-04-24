@@ -21,8 +21,10 @@ private slots:
     void SaveFile_Slot();                           //保存文件
     void OpenFile_Slot();                           //从文件发送
     void SendFile_Slot();                           //发送文件
+    void SendFile_Slot2();                          //文件发送
     void Receive_Slot();                            //串口信息接收槽
     void QwtClean_Slot();                           //清空曲线
+    void ReadMe_Slot();                             //显示使用须知界面
 
     void QwtTime_Slot();                            //设置定时器，定时中断检测
 
@@ -42,6 +44,7 @@ private:
     void Qwt_Init();                                //初始化示波器
     void QwtReceive_Slot();                         //Qwt串口接收槽
     void PortReceive_Slot();                        //串口助手接收槽
+    void Speed_Slot();                              //车速显示器接收槽
     int QwtCurrentNumber();                         //检测波数
 
     double Timei=0;                                 //时间计数器
