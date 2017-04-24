@@ -42,8 +42,8 @@ void MainWindow::Set_Slots()
 
 void MainWindow::MainWindow_Init()
 {
-    this->setMinimumSize(1018,696);
-    this->setMaximumSize(1018,696);
+    //this->setMinimumSize(1018,696);
+    //this->setMaximumSize(1018,696);
     this->setWindowTitle("718 Innovation Lab");
 
     ui->SendCleanBox->setChecked(true);
