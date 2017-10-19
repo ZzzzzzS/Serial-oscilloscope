@@ -1,0 +1,3 @@
+04fc xxxx xxxx xxxx xxxx xxxx xxxx fc04		//×ó
+11fc xxxx xxxx xxxx xxxx xxxx xxxx fc11		//ÓÒ
+33fc xx xx xx xx xx xx xx xx fc33
