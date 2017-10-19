@@ -29,5 +29,5 @@ aboutwindow::~aboutwindow()
 
 void aboutwindow::webslot()
 {
-    QDesktopServices::openUrl(QUrl(QLatin1String("https://github.com/ZzzzzzS/Serial-oscilloscope")));
+    QDesktopServices::openUrl(QUrl(QLatin1String("https://zzzzzzs.github.io/Serial-oscilloscope/")));
 }
